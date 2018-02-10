@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "Better gate.io",
+    "description": "Improves the browsing experience on gate.io",
+    "version": "0.0.2",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://gate.io/myaccount/myhistory/*"
+            ],
+            "js": [
+                "lib/jquery-3.3.1.min.js",
+                "lib/lodash-4.17.4.min.js",
+                "app/scripts/dom-manipulator.js",
+                "app/scripts/screen-scraper.js",
+                "app/scripts/main-my-history.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "browser_action": {
+        "default_icon": "app/assets/icon.png"
+    },
+    "background": {
+        "scripts": [
+            "app/scripts/background.js"
+        ]
+    }
+}
