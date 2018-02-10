@@ -8,9 +8,20 @@ betterGateIo.domManipulator = (function() {
 
     function showStuff(data) {
         var $div = $('<div></div>');
-        data.headerText.each(function(index, element) {
-            $('<div></div>').append(element).appendTo($div);
+
+        var $headersUl = $('<ul></ul>').appendTo($div);
+        _.forEach(data.headers, function(header) {
+            $('<li></li>').append(header.label + ': ' + header.prop).appendTo($headersUl);
         });
+
+        // var $bodyUl = $('<ul></ul>').appendTo($div);
+        // _.forEach(data.history, function(row) {
+        //     var $rowUl = $('<ul></ul>').appendTo($bodyUl);
+        //     _.forEach(row, function(cell) {
+        //         $('<li></li>').append(cell).appendTo($rowUl);
+        //     });
+        // });
+
         $('.sectioncont.mytradehistory-con').prepend($div);
     }
 })();
