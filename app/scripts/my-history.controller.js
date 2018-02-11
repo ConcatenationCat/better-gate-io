@@ -12,10 +12,6 @@ betterGateIo.myHistoryController = (function() {
         _setJQueryObjects();
         betterGateIo.screenScraper.markElements();
         tradeHistoryData = betterGateIo.screenScraper.getTradeHistoryData();
-
-        // _showStuff(tradeHistoryData);
-        // console.log('better-gate-io tradeHistoryData:', tradeHistoryData);
-        
         _addPairFilterInput();
         _updateInfoDisplay();
     }
@@ -94,19 +90,6 @@ betterGateIo.myHistoryController = (function() {
         _setTableScrollDivHeight();
     }
 
-    function _showStuff(data) {
-        var $headersUl = $('<ul></ul>').appendTo(betterGateIo.$.betterDiv);
-        _.forEach(data.headers, function(header) {
-            $('<li></li>').append(header.label + ': ' + header.prop).appendTo($headersUl);
-        });
-    }
-
-    function _setTableBody(rows) {
-        betterGateIo.$.tableBody.html(_.map(rows, function(row) {
-            return row.$row.outerHtml();
-        }));
-    }
-
     function _setTableScrollDivHeight() {
         if (originalTableScrollDivHeight === undefined) {
             var originalTableScrollDivHeightProperty = betterGateIo.$.tableScrollDiv.css('height'); // sample result: '600px'
@@ -120,5 +103,11 @@ betterGateIo.myHistoryController = (function() {
         var betterDivHeight = betterGateIo.$.betterDiv.outerHeight(true); // sample result: 100
         var myTableScrollDivHeight = originalTableScrollDivHeight - betterDivHeight;
         betterGateIo.$.tableScrollDiv.css('height', myTableScrollDivHeight);
+    }
+
+    function _setTableBody(rows) {
+        betterGateIo.$.tableBody.html(_.map(rows, function(row) {
+            return row.$row.outerHtml();
+        }));
     }
 })();
