@@ -12,6 +12,7 @@
                 "lib/jquery-3.3.1.min.js",
                 "lib/lodash-4.17.4.min.js",
                 "app/scripts/screen-scraper.js",
+                "app/scripts/my-history-calculator.js",
                 "app/scripts/my-history.controller.js"
             ],
             "css": [

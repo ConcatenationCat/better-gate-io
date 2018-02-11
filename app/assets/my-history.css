@@ -1,12 +1,22 @@
-.better-gate-io.my-history {
-    margin: 16px;
+.better-gate-io.my-history.better-div {
+    margin: 16px 24px 16px 0;
 }
 
-.better-gate-io.my-history li {
+.better-gate-io.my-history.better-div li {
+    margin-left: 32px;
     list-style-type: disc;
 }
 
-.better-gate-io.my-history li li {
-    margin-left: 16px;
+.better-gate-io.my-history.better-div li li {
+    margin-left: 48px;
     list-style-type: circle;
+}
+
+.better-gate-io.my-history.better-div .info-display {
+    margin-bottom: 16px;
+    float: right;
+}
+
+.better-gate-io.my-history.better-div .pair-filter-container {
+    margin-top: 16px;
 }
