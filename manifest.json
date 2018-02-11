@@ -2,7 +2,12 @@
     "manifest_version": 2,
     "name": "Better gate.io",
     "description": "Improves the browsing experience on gate.io",
-    "version": "0.0.2",
+    "version": "0.0.4",
+    "icons": {
+        "16": "/app/assets/icon16.png",
+        "48": "/app/assets/icon48.png",
+        "128": "/app/assets/icon128.png"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -16,7 +21,7 @@
                 "app/scripts/my-history.controller.js"
             ],
             "css": [
-                "app/assets/my-history.css"
+                "app/styles/my-history.css"
             ],
             "run_at": "document_end"
         }
