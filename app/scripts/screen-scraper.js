@@ -5,8 +5,18 @@ betterGateIo.screenScraper = (function() {
     var cache = {};
 
     return {
+        markElements: markElements,
         getTradeHistoryData: getTradeHistoryData
     };
+
+    function markElements() {
+        var $rows = betterGateIo.$.tableBody.find('tbody tr:not(.table-empty)');
+        $rows.addClass('better-gate-io bodyRow');
+        $rows.each(function(index) {
+            $(this).data('original-index', index);
+            $(this).attr('data-original-index', index);
+        });
+    }
 
     function getTradeHistoryData() {
         if (cache.tradeHistoryData !== undefined) {
@@ -14,13 +24,18 @@ betterGateIo.screenScraper = (function() {
         }
 
         var headerText = _getHeaderText();
-        var bodyText = _getBodyText();
-
         cache.tradeHistoryData = {
             headers: _convertRawHeaderTextToHeaders(headerText),
-            history: _convertRawDataToObjects(headerText, bodyText)
+            history: _getBodyData(headerText)
         };
         return cache.tradeHistoryData;
+    }
+
+    function _getHeaderText() {
+        var $headers = betterGateIo.$.tableHeader.find('thead tr th');
+        return $headers.map(function() {
+            return $(this).text();
+        });
     }
 
     function _convertRawHeaderTextToHeaders(headerText) {
@@ -32,28 +47,18 @@ betterGateIo.screenScraper = (function() {
         });
     }
 
-    function _convertRawDataToObjects(headerText, bodyText) {
+    function _getBodyData(headerText) {
+        var $rows = betterGateIo.$.tableBody.find('tbody tr:not(.table-empty)');
         var headerTextCamelCase = _.map(headerText, _.camelCase);
-        return _.map(bodyText, function(row) {
-            return _.zipObject(headerTextCamelCase, row);
-        });
-    }
-
-    function _getHeaderText() {
-        var $tableHeader = $('.sectioncont.mytradehistory-con table.table-inacc.table-inacc-head');
-        var $headers = $tableHeader.find('thead tr th');
-        return $headers.map(function() {
-            return $(this).text();
-        });
-    }
-
-    function _getBodyText() {
-        var $tableBody = $('.sectioncont.mytradehistory-con table.table-inacc.table-inacc-body');
-        var $rows = $tableBody.find('tbody tr:not(.table-empty)');
-        return $rows.map(function() {
-            return $(this).find('td').map(function() {
+        return $rows.map(function(index) {
+            var $row = $(this)
+            var rowText = $row.find('td').map(function() {
                 return $(this).text();
             });
+            var obj = _.zipObject(headerTextCamelCase, rowText);
+            obj.originalIndex = $row.data('original-index');
+            obj.$row = $row;
+            return obj;
         });
     }
 })();

@@ -1,0 +1,12 @@
+.better-gate-io.my-history {
+    margin: 16px;
+}
+
+.better-gate-io.my-history li {
+    list-style-type: disc;
+}
+
+.better-gate-io.my-history li li {
+    margin-left: 16px;
+    list-style-type: circle;
+}

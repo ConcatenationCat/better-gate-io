@@ -11,19 +11,13 @@
             "js": [
                 "lib/jquery-3.3.1.min.js",
                 "lib/lodash-4.17.4.min.js",
-                "app/scripts/dom-manipulator.js",
                 "app/scripts/screen-scraper.js",
-                "app/scripts/main-my-history.js"
+                "app/scripts/my-history.controller.js"
+            ],
+            "css": [
+                "app/assets/my-history.css"
             ],
             "run_at": "document_end"
         }
-    ],
-    "browser_action": {
-        "default_icon": "app/assets/icon.png"
-    },
-    "background": {
-        "scripts": [
-            "app/scripts/background.js"
-        ]
-    }
+    ]
 }
