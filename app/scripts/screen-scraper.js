@@ -16,19 +16,20 @@ betterGateIo.screenScraper = (function() {
         var headerText = _getHeaderText();
         var bodyText = _getBodyText();
 
-        var headers = _.map(headerText, function(text) {
+        cache.tradeHistoryData = {
+            headers: _convertRawHeaderTextToHeaders(headerText),
+            history: _convertRawDataToObjects(headerText, bodyText)
+        };
+        return cache.tradeHistoryData;
+    }
+
+    function _convertRawHeaderTextToHeaders(headerText) {
+        return _.map(headerText, function(text) {
             return {
                 label: text,
                 prop: _.camelCase(text)
             }
         });
-        var objects = _convertRawDataToObjects(headerText, bodyText);
-
-        cache.tradeHistoryData = {
-            headers: headers,
-            history: objects
-        };
-        return cache.tradeHistoryData;
     }
 
     function _convertRawDataToObjects(headerText, bodyText) {
@@ -48,7 +49,7 @@ betterGateIo.screenScraper = (function() {
 
     function _getBodyText() {
         var $tableBody = $('.sectioncont.mytradehistory-con table.table-inacc.table-inacc-body');
-        var $rows = $tableBody.find('tbody tr');
+        var $rows = $tableBody.find('tbody tr:not(.table-empty)');
         return $rows.map(function() {
             return $(this).find('td').map(function() {
                 return $(this).text();
